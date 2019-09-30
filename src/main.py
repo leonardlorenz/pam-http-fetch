@@ -1,13 +1,16 @@
 import requests
-import json
 import sys
-import os
+from configparser import ConfigParser
 
-DOMAIN = os.environ['PAM_HTTP_PROVIDER_DOMAIN']
-PORT = os.environ['PAM_HTTP_PROVIDER_PORT']
-URI = os.environ['PAM_HTTP_PROVIDER_URI']
-OUTPUT_FILE_PATH = os.environ['PAM_HTTP_OUTPUT_FILE_PATH']
-TOKEN = os.environ['PAM_HTTP_AUTHENTICATION_TOKEN']
+config = ConfigParser()
+config.read('../config.ini')
+default = config['default']
+
+DOMAIN           = default['PAM_HTTP_PROVIDER_DOMAIN']
+PORT             = default['PAM_HTTP_PROVIDER_PORT']
+URI              = default['PAM_HTTP_PROVIDER_URI']
+OUTPUT_FILE_PATH = default['PAM_HTTP_OUTPUT_FILE_PATH']
+TOKEN            = default['PAM_HTTP_AUTHENTICATION_TOKEN']
 
 users = requests.get(
         'http://' + DOMAIN + ':' + PORT + '/' + URI,
