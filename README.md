@@ -1,5 +1,5 @@
 # Necessary Environment Variables
-preferably export in ./.env.sh and source before run
+preferably put them into .env and run with docker-compose up
 
 | Environment Variables Name        | Description                             |
 | :-------------------------------- | :-------------------------------------- |

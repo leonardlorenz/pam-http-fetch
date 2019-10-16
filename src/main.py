@@ -1,16 +1,12 @@
+#!/usr/bin/env python
 import requests
-import sys
-from configparser import ConfigParser
+from os import environ
 
-config = ConfigParser()
-config.read('../config.ini')
-default = config['default']
-
-DOMAIN           = default['PAM_HTTP_PROVIDER_DOMAIN']
-PORT             = default['PAM_HTTP_PROVIDER_PORT']
-URI              = default['PAM_HTTP_PROVIDER_URI']
-OUTPUT_FILE_PATH = default['PAM_HTTP_OUTPUT_FILE_PATH']
-TOKEN            = default['PAM_HTTP_AUTHENTICATION_TOKEN']
+DOMAIN              = environ['PAM_HTTP_PROVIDER_DOMAIN']
+PORT                = environ['PAM_HTTP_PROVIDER_PORT']
+URI                 = environ['PAM_HTTP_PROVIDER_URI']
+OUTPUT_FILE_PATH    = environ['PAM_HTTP_OUTPUT_FILE_PATH']
+TOKEN               = environ['PAM_HTTP_AUTHENTICATION_TOKEN']
 
 users = requests.get(
         'http://' + DOMAIN + ':' + PORT + '/' + URI,
@@ -20,5 +16,6 @@ user_list = users.json()
 print(user_list)
 
 with open(OUTPUT_FILE_PATH, 'w') as f:
+    f.write("root")
     for user in user_list:
         f.write(str(user['username']) + '\n')

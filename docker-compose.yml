@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+    ssh-server:
+        image: ssh-server
+        container_name: ssh-server
+        build:
+            context: .
+        ports:
+            - "22:2222"
+        env_file:
+            - .env
